@@ -9,10 +9,10 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     const navLinks = [
-        { name: 'Home', href: '/#' },
-        { name: 'create', href: '/#create' },
-        { name: 'community', href: '/#community' },
-        { name: 'plans', href: '/#plans' },
+        { name: 'Home', href: '/' },
+        { name: 'create', href: '/generator' },
+        { name: 'community', href: '/community' },
+        { name: 'plans', href: '/plans' },
     ];
 
     return (
@@ -48,9 +48,9 @@ export default function Navbar() {
             </div>
             <div className={`flex flex-col items-center justify-center gap-6 text-lg font-medium fixed inset-0 bg-black/40 backdrop-blur-md z-50 transition-all duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
                 {navLinks.map((link) => (
-                    <a key={link.name} href={link.href} onClick={() => setIsOpen(false)}>
+                    <Link key={link.name} to={link.href} onClick={() => setIsOpen(false)} className="hover:text-white transition">
                         {link.name}
-                    </a>
+                    </Link>
                 ))}
 
                 <button onClick={() => setIsOpen(false)} className='font-medium text-gray-300 hover:text-white transition'>
