@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Title from "../components/Title";
 import UploadZone from "../components/UploadZone";
+import { RectangleVerticalIcon } from "lucide-react";
 
 const Generator=() => {
     const[name,setName]=useState("");
@@ -38,14 +39,37 @@ const Generator=() => {
         <UploadZone label="Model Image" file={modelImage} onClear={()=>setModelImage(null)} onChange={(e)=>handlefileChange(e, "model")} />
        
         </div>
-        <div>
-            <p>
-                right col
-            </p>
+
+
+
+
+        <div className="w-full">
+           <div className="mb-4">
+            <label htmlFor="name" className="block text-sm mb-4"> Project Name</label>
+            <input type="text" id="name" value={name} onChange={(e)=>setName(e.target.value)}  placeholder="Name your project" required className="w-full bg-white/3 rounded-lg border-2 p-4 text-sm
+            border-violet-200/10 focus:border-violet-500/50 outline-none transition-all" />
+           </div>
+           <div className="mb-4 text-grey-300">
+            <label htmlFor="Productname" className="block text-sm mb-4"> Product Name</label>
+            <input type="text" id="Productname" value={Productname} onChange={(e)=>setProductName(e.target.value)}  placeholder="Enter product name" required className="w-full bg-white/3 rounded-lg border-2 p-4 text-sm
+            border-violet-200/10 focus:border-violet-500/50 outline-none transition-all" />
+           </div>
+           <div className="mb-4 text-gray-300">
+            <label htmlFor="ProductDescription" className="block text-sm mb-4"> Product Description <span className="text-xs text-violet-400">(optional)</span></label>
+            <textarea id="ProductDescription" rows={4} value={ProductDescription} onChange={(e)=>setProductDescription(e.target.value)} placeholder="Enter product description" className="w-full bg-white/3 rounded-lg border-2 p-4 text-sm
+            border-violet-200/10 focus:border-violet-500/50 outline-none resize-none transition-all" />
+           </div>
+           <div className="mb-4 text-gray-300">
+            <label className="block text-sm mb-4"> Aspect Ratio</label>
+            <div className="flex gap-3">
+                <RectangleVerticalIcon onClick={()=>setAspectRation('9:16')}
+                className={`p-2.5 size-13 bg-white/6 rounded transition-all ring-2
+                ring-transparent cursor-pointer ${aspectRatio==='9:16'? 'ring-violet-500/50 bg-white/10': ''`} />
+            </div>
+           </div>
         </div>
-    </div>    <button type="submit" disabled={isGenerating} className="mt-8 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold disabled:opacity-50">
-        {isGenerating ? "Generating..." : "Create"}
-    </button></form>
+    </div>   
+   </form>
         </div>
     )
 }
