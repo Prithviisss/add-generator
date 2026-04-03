@@ -1,4 +1,4 @@
-import { XIcon } from 'lucide-react';
+import { XIcon, UploadIcon } from 'lucide-react';
 import type { UploadZoneProps } from '../Types/Index';
 
 const UploadZone = ({label,file,onClear,onChange}:UploadZoneProps) => {
@@ -30,10 +30,12 @@ const UploadZone = ({label,file,onClear,onChange}:UploadZoneProps) => {
                         <UploadIcon className='w-8 h-8 text-gray-400
                         group-hover:tex-violet-400 transition-colors' />
                     </div>
-                    <h3>
+                    <h3 className='text-lg font-semibold mb-2'>
                         {label}
                     </h3>
-                    <p> Drag & drop or click to upload</p>
+                    <p className='text-sm text-grey-400 text-center max-w-[200px]'>
+                        Drag & drop or click to upload
+                    </p>
                     <input type="file" accept="image/*" onChange={onChange} className='absolute inset-0 w-full h-full opacity-0 cursor-pointer' onChange={onChange} />
                     </>
                 )}
