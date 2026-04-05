@@ -1,14 +1,11 @@
-import type React from "react"
 import type { project } from "../Types/Index"
-import { use, useState } from "react"
-import { useNavigate } from "react-router-dom";
-import { Loader2Icon } from "lucide-react";
+import { useState } from "react"
+import { EllipsisIcon, ImageIcon, Loader2Icon } from "lucide-react";
 
 
-const ProjectCard = ({gen,setGenerations,forCommunity=false}:
-    {gen:project,setGenerations:React.Dispatch<React.SetStateAction<project[]>>,forCommunity?:boolean}) => {
-        const navigate=useNavigate();
-        const{menuOpen,setMenuOpen}=useState(false);
+const ProjectCard = ({gen,forCommunity=false}:
+    {gen:project,forCommunity?:boolean}) => {
+        const [menuOpen,setMenuOpen]=useState(false);
   return (
     <div key={gen.id} className="">
       <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden
@@ -36,10 +33,28 @@ const ProjectCard = ({gen,setGenerations,forCommunity=false}:
                 {gen.isGenerating &&(
                     <span className="text-xs px-2 py-1 bg-yellow-600/30 rounded-full">Generating</span>
                 )}  
-                {gen.isGenerating &&(
+                {gen.isPublished &&(
                     <span className="text-xs px-2 py-1 bg-green-600/30 rounded-full">Published</span>
                 )} 
                   </div>
+                  {/* action menu */}
+                  {!forCommunity&&(
+                    <div
+                    onMouseDownCapture={() => {setMenuOpen(true)}}
+                    onMouseLeave={() => {setMenuOpen(false)}}
+                     className="absolute right-3 top-3 sm:opacity-0
+                    group-hover:opacity-100 transition flex items-center gap-2">
+                        <div className="absolute top-3 right-3"><EllipsisIcon className="ml-auto bg-black/10 rounded-full p-1 size-7" /> </div>
+                        <div className="flex flex-col items-end w-32 text-sm">
+                            <ul className={`text-xs ${menuOpen ?'block ':'hidden'} verflow-hidden
+                            right-0 peer-focus:block hover:block w-40 bg-black/50 backdrop-blur text-white border border-gray-500/50
+                            rounded-lg shadow-md mt-2 py-1 z-10`}>
+                                {gen.generatedImage && <a href="#" download 
+                                className="flex gap-2 items-center px-4 py-2 hover:bg-black/10 cursor-pointer"> <ImageIcon size={14} /> Download Image</a>}
+                                </ul>
+                                </div>
+                        </div>
+                  )}
                   <div className="absolute right-3 bottom-3">
                     <img src={gen.uploadedImages[0]} alt="product" className="w-16 h-16 object-cover rounded-full animate-float" />
                      <img src={gen.uploadedImages[1]} alt="model" className="w-16 h-16 object-cover rounded-full animate-float -ml-8" style={{animationDelay:'3s'}} />

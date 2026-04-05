@@ -24,6 +24,7 @@ export interface project{
   generatedImage?: string;
   generatedVideo?: string;
   isGenerating: boolean;
+  isPublished?: boolean;
   error?:string;
   createdAt:Date | string;
    updatedAt?:Date | string;
